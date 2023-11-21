@@ -21,6 +21,12 @@
             tfoot tr th {
                 text-align: right;
             }
+            .green {
+                color:green;
+            }
+            .red {
+                color:red;
+            }
         </style>
     </head>
     <body>
@@ -35,19 +41,29 @@
             </thead>
             <tbody>
                 <!-- YOUR CODE -->
+                <?php 
+                foreach (getCsv() as $csv){
+                    echo '<tr>';
+                    echo "<td>" . formatDate($csv['Date']) . "</td>";
+                    echo "<td>" . $csv['Check #'] . "</td>";
+                    echo "<td>" . $csv['Description'] . "</td>";
+                    echo "<td class='" . getClass($csv['Amount']) . "'>" . $csv['Amount'] . "</td>";
+                    echo '</tr>';
+                }
+                ?>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="3">Total Income:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td>$<?= getPositive();?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Total Expense:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td>$<?= getNegative();?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Net Total:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td>$<?= getTotal();?></td>
                 </tr>
             </tfoot>
         </table>
